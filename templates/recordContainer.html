@@ -1,0 +1,18 @@
+{% macro recordContainer(display_name, songs, id, duration) -%}
+<div class="recordContainer" id="{{ id }}">
+    <h2 class="logo">
+        RECORDIFY
+    </h2>
+    {% for song in songs %}
+    <tr>
+        <td class="begin">
+            {{ loop.index }}
+        </td>
+        <td class="name">
+            {{ song.name }} - {{ song.artists[0].name }}
+            <br>
+        </td>
+    </tr>
+    {% endfor %}
+</div>
+{%- endmacro %}

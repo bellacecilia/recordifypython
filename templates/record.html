@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>{{ title }}</title>
+    </head>
+<body>
+    {% from "recordContainer.html" import recordContainer with context %}
+
+    <script>
+        var activeReceipt;
+
+
+    function showContent(id) {
+    // set all of the other ones to invisible
+        for (let i = 0; i < document.querySelectorAll(".recordContainer").length; i++) {
+            document.querySelectorAll(".recordContainer")[i].style.display = "none"
+        }
+        document.getElementById(id).style.display = 'inline-block'
+        activeReceipt = id
+    }
+    </script>
+
+    <center>
+        <h1>Recordify</h1>
+        <h2>Top Track Generator</h2>
+        <div style="width: 100%; height: auto" class="buttons">
+            <center>
+                <div>
+                    <button onclick="showContent('short_term_record')" class="generatePicButton">Short Term Record</button>
+                    <button onclick="showContent('medium_term_record')" class="generatePicButton">Medium Term Record</button>
+                    <button onclick="showContent('long_term_record')" class="generatePicButton">Long Term Record</button>
+                </div>
+            </center>
+        </div>
+        <div style="width: 100%; height: auto" class="recordContainerWrapper">
+            <center>
+                {{ recordContainer(user_display_name, short_term['items'], 'short_term_record', 'LAST MONTH') }}
+                {{ recordContainer(user_display_name, medium_term['items'], 'medium_term_record', 'LAST 6 MONTHS') }}
+                {{ recordContainer(user_display_name, long_term['items'], 'long_term_record', 'ALL TIME') }}
+            </center>
+        </div>
+
+    </center>
+</body>
+
+</html>
